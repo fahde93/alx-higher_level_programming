@@ -1,2 +1,3 @@
 #!/usr/bin/node
-console.log(process.argv[2] + ' is ' + process.argv[3]);
+const Args = process.argv.slice(2);
+console.log(Args[0], 'is', Args[1]);
