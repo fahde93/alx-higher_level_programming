@@ -1,23 +1,24 @@
 #!/usr/bin/python3
-"""peak-finding."""
+"""function that found peak"""
 
 
 def find_peak(list_of_integers):
-    """Return the lowest peak from a list."""
-    if list_of_integers == []:
+    """function that finds a peak in a list of unsorted integers.
+        i use binary search algorithm, recursive.
+    """
+    if not list_of_integers:
         return None
 
-    size = len(list_of_integers)
-    if size == 1:
-        return list_of_integers[0]
-    elif size == 2:
-        return max(list_of_integers)
+    left, right = 0, len(list_of_integers) - 1
 
-    mid = int(size / 2)
-    peak = list_of_integers[mid]
-    if peak > list_of_integers[mid - 1] and peak > list_of_integers[mid + 1]:
-        return peak
-    elif peak < list_of_integers[mid - 1]:
-        return find_peak(list_of_integers[:mid])
-    else:
-        return find_peak(list_of_integers[mid + 1:])
+    while left < right:
+        mid = (left + right) // 2
+
+        if list_of_integers[mid] < list_of_integers[mid + 1]:
+            # Move towards the right (larger neighbor)
+            left = mid + 1
+        else:
+            # Move towards the left (larger neighbor)
+            right = mid
+
+    return list_of_integers[left]
